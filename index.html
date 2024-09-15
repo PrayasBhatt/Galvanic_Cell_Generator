@@ -23,7 +23,21 @@
                 <option value="Mg">Magnesium (Mg)</option>
                 <option value="Pt">Platinum (Pt)</option>
             </select>
-
+        
+            <label for="anodeSolution">Select Solution for Anode:</label>
+            <select id="anodeSolution" required>
+                <option value="">Choose Solution</option>
+                <option value="ZnSO4">Zinc Sulfate (ZnSO₄)</option>
+                <option value="CuSO4">Copper Sulfate (CuSO₄)</option>
+                <option value="AgNO3">Silver Nitrate (AgNO₃)</option>
+                <option value="FeSO4">Iron Sulfate (FeSO₄)</option>
+                <option value="PbNO3">Lead Nitrate (Pb(NO₃)₂)</option>
+                <option value="NiSO4">Nickel Sulfate (NiSO₄)</option>
+                <option value="AuCl3">Gold Chloride (AuCl₃)</option>
+                <option value="MgSO4">Magnesium Sulfate (MgSO₄)</option>
+                <option value="H2SO4">Sulfuric Acid (H₂SO₄)</option>
+            </select>
+        
             <label for="cathode">Select Cathode:</label>
             <select id="cathode" required>
                 <option value="">Choose Cathode</option>
@@ -36,19 +50,32 @@
                 <option value="Mg">Magnesium (Mg)</option>
                 <option value="Pt">Platinum (Pt)</option>
             </select>
-
+        
+            <label for="cathodeSolution">Select Solution for Cathode:</label>
+            <select id="cathodeSolution" required>
+                <option value="">Choose Solution</option>
+                <option value="ZnSO4">Zinc Sulfate (ZnSO₄)</option>
+                <option value="CuSO4">Copper Sulfate (CuSO₄)</option>
+                <option value="AgNO3">Silver Nitrate (AgNO₃)</option>
+                <option value="FeSO4">Iron Sulfate (FeSO₄)</option>
+                <option value="PbNO3">Lead Nitrate (Pb(NO₃)₂)</option>
+                <option value="NiSO4">Nickel Sulfate (NiSO₄)</option>
+                <option value="AuCl3">Gold Chloride (AuCl₃)</option>
+                <option value="MgSO4">Magnesium Sulfate (MgSO₄)</option>
+                <option value="H2SO4">Sulfuric Acid (H₂SO₄)</option>
+            </select>
+        
             <button type="submit">Generate Galvanic Cell</button>
+            <button type="button" id="switchButton">Switch Anode and Cathode</button>
         </form>
+        
 
         <canvas id="galvanicCellCanvas" width="500" height="400"></canvas>
 
-        <!-- Placeholder for the blast effect -->
         <div id="blastEffect" class="blastEffect">Boom! Same Anode and Cathode, No Current!</div>
 
-        <!-- Section to show the result of electron flow -->
         <div id="result" class="result"></div>
 
-        <!-- Section to show the current flow status -->
         <div id="currentFlowStatus"></div>
     </div>
 
