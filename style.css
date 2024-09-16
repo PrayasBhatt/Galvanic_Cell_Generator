@@ -59,20 +59,6 @@ button:hover {
     background-color: #00a079;
 }
 
-button#switchButton {
-    background-color: #ff7675;
-    color: #fff;
-    cursor: pointer;
-    border: none;
-    border-radius: 5px;
-    padding: 10px;
-    margin-bottom: 15px;
-}
-
-button#switchButton:hover {
-    background-color: #ff6f61;
-}
-
 canvas {
     margin-top: 20px;
     background-color: #fff;

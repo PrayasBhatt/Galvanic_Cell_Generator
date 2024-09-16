@@ -13,62 +13,65 @@
             <label for="anode">Select Anode:</label>
             <select id="anode" required>
                 <option value="">Choose Anode</option>
-                <option value="Zn">Zinc (Zn)</option>
-                <option value="Cu">Copper (Cu)</option>
-                <option value="Ag">Silver (Ag)</option>
-                <option value="Fe">Iron (Fe)</option>
-                <option value="Pb">Lead (Pb)</option>
-                <option value="Ni">Nickel (Ni)</option>
-                <option value="Au">Gold (Au)</option>
+                <!-- Updated list of elements -->
+                <option value="Li">Lithium (Li)</option>
+                <option value="K">Potassium (K)</option>
+                <option value="Ca">Calcium (Ca)</option>
+                <option value="Na">Sodium (Na)</option>
                 <option value="Mg">Magnesium (Mg)</option>
-                <option value="Pt">Platinum (Pt)</option>
+                <option value="Al">Aluminum (Al)</option>
+                <option value="OH">Hydroxide (OH)</option>
+                <option value="Zn">Zinc (Zn)</option>
+                <option value="Fe">Iron (Fe)</option>
+                <option value="Ni">Nickel (Ni)</option>
+                <option value="Sn">Tin (Sn)</option>
+                <option value="Pb">Lead (Pb)</option>
+                <option value="H2">Hydrogen (H₂)</option>
+                <option value="Cu">Copper (Cu)</option>
+                <option value="I">Iodine (I)</option>
+                <option value="Ag">Silver (Ag)</option>
+                <option value="Hg">Mercury (Hg)</option>
+                <option value="Br">Bromine (Br)</option>
+                <option value="H2O">Water (H₂O)</option>
+                <option value="Cr">Chromium (Cr)</option>
+                <option value="Cl">Chlorine (Cl)</option>
+                <option value="Au">Gold (Au)</option>
+                <option value="Mn">Manganese (Mn)</option>
+                <option value="F">Fluorine (F)</option>
             </select>
-        
-            <label for="anodeSolution">Select Solution for Anode:</label>
-            <select id="anodeSolution" required>
-                <option value="">Choose Solution</option>
-                <option value="ZnSO4">Zinc Sulfate (ZnSO₄)</option>
-                <option value="CuSO4">Copper Sulfate (CuSO₄)</option>
-                <option value="AgNO3">Silver Nitrate (AgNO₃)</option>
-                <option value="FeSO4">Iron Sulfate (FeSO₄)</option>
-                <option value="PbNO3">Lead Nitrate (Pb(NO₃)₂)</option>
-                <option value="NiSO4">Nickel Sulfate (NiSO₄)</option>
-                <option value="AuCl3">Gold Chloride (AuCl₃)</option>
-                <option value="MgSO4">Magnesium Sulfate (MgSO₄)</option>
-                <option value="H2SO4">Sulfuric Acid (H₂SO₄)</option>
-            </select>
-        
+
             <label for="cathode">Select Cathode:</label>
             <select id="cathode" required>
                 <option value="">Choose Cathode</option>
-                <option value="Cu">Copper (Cu)</option>
-                <option value="Ag">Silver (Ag)</option>
-                <option value="Fe">Iron (Fe)</option>
-                <option value="Pb">Lead (Pb)</option>
-                <option value="Ni">Nickel (Ni)</option>
-                <option value="Au">Gold (Au)</option>
+                <!-- Updated list of elements -->
+                <option value="Li">Lithium (Li)</option>
+                <option value="K">Potassium (K)</option>
+                <option value="Ca">Calcium (Ca)</option>
+                <option value="Na">Sodium (Na)</option>
                 <option value="Mg">Magnesium (Mg)</option>
-                <option value="Pt">Platinum (Pt)</option>
+                <option value="Al">Aluminum (Al)</option>
+                <option value="OH">Hydroxide (OH)</option>
+                <option value="Zn">Zinc (Zn)</option>
+                <option value="Fe">Iron (Fe)</option>
+                <option value="Ni">Nickel (Ni)</option>
+                <option value="Sn">Tin (Sn)</option>
+                <option value="Pb">Lead (Pb)</option>
+                <option value="H2">Hydrogen (H₂)</option>
+                <option value="Cu">Copper (Cu)</option>
+                <option value="I">Iodine (I)</option>
+                <option value="Ag">Silver (Ag)</option>
+                <option value="Hg">Mercury (Hg)</option>
+                <option value="Br">Bromine (Br)</option>
+                <option value="H2O">Water (H₂O)</option>
+                <option value="Cr">Chromium (Cr)</option>
+                <option value="Cl">Chlorine (Cl)</option>
+                <option value="Au">Gold (Au)</option>
+                <option value="Mn">Manganese (Mn)</option>
+                <option value="F">Fluorine (F)</option>
             </select>
-        
-            <label for="cathodeSolution">Select Solution for Cathode:</label>
-            <select id="cathodeSolution" required>
-                <option value="">Choose Solution</option>
-                <option value="ZnSO4">Zinc Sulfate (ZnSO₄)</option>
-                <option value="CuSO4">Copper Sulfate (CuSO₄)</option>
-                <option value="AgNO3">Silver Nitrate (AgNO₃)</option>
-                <option value="FeSO4">Iron Sulfate (FeSO₄)</option>
-                <option value="PbNO3">Lead Nitrate (Pb(NO₃)₂)</option>
-                <option value="NiSO4">Nickel Sulfate (NiSO₄)</option>
-                <option value="AuCl3">Gold Chloride (AuCl₃)</option>
-                <option value="MgSO4">Magnesium Sulfate (MgSO₄)</option>
-                <option value="H2SO4">Sulfuric Acid (H₂SO₄)</option>
-            </select>
-        
+
             <button type="submit">Generate Galvanic Cell</button>
-            <button type="button" id="switchButton">Switch Anode and Cathode</button>
         </form>
-        
 
         <canvas id="galvanicCellCanvas" width="500" height="400"></canvas>
 

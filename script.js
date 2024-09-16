@@ -21,15 +21,38 @@ document.getElementById('cellForm').addEventListener('submit', function(event) {
     }
 });
 
-document.getElementById('switchButton').addEventListener('click', function() {
-    let anodeSelect = document.getElementById('anode');
-    let cathodeSelect = document.getElementById('cathode');
-    let temp = anodeSelect.value;
-    anodeSelect.value = cathodeSelect.value;
-    cathodeSelect.value = temp;
+const elementOrder = [
+    "Li", "K", "Ca", "Na", "Mg", "Al", "OH", "Zn", "Fe", "Ni", "Sn", "Pb",
+    "H2", "Cu", "I", "Fe", "Ag", "Hg", "Br", "H2O", "Cr", "Cl", "Au", "Mn", "F"
+];
 
-    document.getElementById('cellForm').dispatchEvent(new Event('submit'));
+document.getElementById('anode').addEventListener('change', function() {
+    updateCathodeOptions();
 });
+
+function updateCathodeOptions() {
+    const anode = document.getElementById('anode').value;
+    const cathodeSelect = document.getElementById('cathode');
+    const anodeIndex = elementOrder.indexOf(anode);
+
+    // Enable all options initially
+    Array.from(cathodeSelect.options).forEach(option => {
+        option.disabled = false;
+    });
+
+    // Disable options based on the selected anode
+    Array.from(cathodeSelect.options).forEach(option => {
+        const optionValue = option.value;
+        if (elementOrder.indexOf(optionValue) < anodeIndex) {
+            option.disabled = true;
+        }
+    });
+
+    // Reset cathode selection if the selected cathode is disabled
+    if (cathodeSelect.value && cathodeSelect.options[cathodeSelect.selectedIndex].disabled) {
+        cathodeSelect.value = '';
+    }
+}
 
 function resetCanvas() {
     const canvas = document.getElementById('galvanicCellCanvas');
@@ -44,21 +67,28 @@ function drawGalvanicCell(anode, cathode) {
     const ctx = canvas.getContext('2d');
 
     const electrodeColors = {
-        "Zn": "#A8A8A8", "Cu": "#B87333", "Ag": "#C0C0C0", "Fe": "#A52A2A", 
-        "Pb": "#708090", "Ni": "#BC8F8F", "Au": "#FFD700", "Mg": "#F0E68C", 
-        "Pt": "#E5E4E2"
+        "Li": "#FF0000", "K": "#8A2BE2", "Ca": "#7FFF00", "Na": "#FFD700", "Mg": "#00FF00",
+        "Al": "#B0C4DE", "OH": "#00FFFF", "Zn": "#A8A8A8", "Fe": "#A52A2A", "Ni": "#BC8F8F",
+        "Sn": "#D3D3D3", "Pb": "#708090", "H2": "#F0E68C", "Cu": "#B87333", "I": "#FF00FF",
+        "Ag": "#C0C0C0", "Hg": "#F5DEB3", "Br": "#FFA07A", "H2O": "#00BFFF", "Cr": "#8B4513",
+        "Cl": "#00FF00", "Au": "#FFD700", "Mn": "#FF69B4", "F": "#FF6347"
     };
     const solutionColors = {
-        "Zn": "#D3D3D3", "Cu": "#4682B4", "Ag": "#E5E4E2", "Fe": "#CD5C5C", 
-        "Pb": "#708090", "Ni": "#98FB98", "Au": "#FFEC8B", "Mg": "#E0FFFF", 
-        "Pt": "#F5F5F5"
+        "Li": "#FFB6C1", "K": "#E6E6FA", "Ca": "#FFFFE0", "Na": "#FFDAB9", "Mg": "#E0FFFF",
+        "Al": "#F5F5DC", "OH": "#F0F8FF", "Zn": "#D3D3D3", "Fe": "#FF6347", "Ni": "#E6E6FA",
+        "Sn": "#DCDCDC", "Pb": "#F0E68C", "H2": "#E0FFFF", "Cu": "#ADD8E6", "I": "#D8BFD8",
+        "Ag": "#C0C0C0", "Hg": "#FFE4C4", "Br": "#FFE4E1", "H2O": "#87CEEB", "Cr": "#D2B48C",
+        "Cl": "#F5F5DC", "Au": "#F0E68C", "Mn": "#FF1493", "F": "#FFB6C1"
     };
     const solutionNames = {
-        "Zn": "Zinc Sulfate (ZnSO₄)", "Cu": "Copper Sulfate (CuSO₄)", 
-        "Ag": "Silver Nitrate (AgNO₃)", "Fe": "Iron Sulfate (FeSO₄)", 
-        "Pb": "Lead Nitrate (Pb(NO₃)₂)", "Ni": "Nickel Sulfate (NiSO₄)", 
-        "Au": "Gold Chloride (AuCl₃)", "Mg": "Magnesium Sulfate (MgSO₄)", 
-        "Pt": "Sulfuric Acid (H₂SO₄)"
+        "Li": "Lithium Sulfate (LiSO₄)", "K": "Potassium Sulfate (KSO₄)", "Ca": "Calcium Sulfate (CaSO₄)",
+        "Na": "Sodium Sulfate (NaSO₄)", "Mg": "Magnesium Sulfate (MgSO₄)", "Al": "Aluminum Sulfate (AlSO₄)",
+        "OH": "Hydroxide (OH)", "Zn": "Zinc Sulfate (ZnSO₄)", "Fe": "Iron Sulfate (FeSO₄)",
+        "Ni": "Nickel Sulfate (NiSO₄)", "Sn": "Tin Sulfate (SnSO₄)", "Pb": "Lead Sulfate (PbSO₄)",
+        "H2": "Hydrogen Sulfate (H₂SO₄)", "Cu": "Copper Sulfate (CuSO₄)", "I": "Iodine Sulfate (ISO₄)",
+        "Ag": "Silver Sulfate (AgSO₄)", "Hg": "Mercury Sulfate (HgSO₄)", "Br": "Bromine Sulfate (BrSO₄)",
+        "H2O": "Water (H₂O)", "Cr": "Chromium Sulfate (CrSO₄)", "Cl": "Chlorine Sulfate (ClSO₄)",
+        "Au": "Gold Sulfate (AuSO₄)", "Mn": "Manganese Sulfate (MnSO₄)", "F": "Fluorine Sulfate (FSO₄)"
     };
 
     ctx.fillStyle = solutionColors[anode];
@@ -97,29 +127,90 @@ function drawGalvanicCell(anode, cathode) {
     ctx.fillText('Galvanometer', 220, 40);
 }
 
+let electronBalls = [];
+let currentBalls = [];
+let maxParticles = 3; // Maximum number of electron and current particles
+
 function animateElectronFlow() {
     const canvas = document.getElementById('galvanicCellCanvas');
     const rect = canvas.getBoundingClientRect();
-    const electronBall = document.createElement('div');
-    electronBall.classList.add('electronFlow');
-    document.body.appendChild(electronBall);
 
-    electronBall.style.top = `${rect.top + 150}px`; 
-    electronBall.style.left = `${rect.left + 80}px`; 
-    electronBall.style.animation = 'electronMove 2s linear infinite';
+    // Clear any existing particles before creating new ones
+    electronBalls.forEach(ball => ball.remove());
+    electronBalls = [];
+
+    for (let i = 0; i < maxParticles; i++) {
+        const electronBall = document.createElement('div');
+        electronBall.classList.add('electronFlow');
+        document.body.appendChild(electronBall);
+        electronBalls.push(electronBall);
+
+        electronBall.style.position = 'absolute';
+        electronBall.style.top = `${rect.top + 130}px`; // Above the black line
+        electronBall.style.left = `${rect.left + 110}px`;
+
+        // Each electron starts with a delay so they don't overlap
+        electronBall.animate([
+            { transform: `translate(0px, 0px)` },              // Start at anode
+            { transform: `translate(0px, -120px)` },           // Move higher above the black line
+            { transform: `translate(250px, -120px)` },         // Move right
+            { transform: `translate(250px, 0px)` }             // Move down to cathode
+        ], {
+            duration: 3000,
+            iterations: Infinity,
+            delay: i * 500 // Staggered start for each particle
+        });
+    }
 }
 
 function animateCurrentFlow() {
     const canvas = document.getElementById('galvanicCellCanvas');
     const rect = canvas.getBoundingClientRect();
-    const currentBall = document.createElement('div');
-    currentBall.classList.add('currentFlow');
-    document.body.appendChild(currentBall);
 
-    currentBall.style.top = `${rect.top + 150}px`; 
-    currentBall.style.left = `${rect.left + 360}px`; 
-    currentBall.style.animation = 'currentMove 2s linear infinite';
+    // Clear any existing particles before creating new ones
+    currentBalls.forEach(ball => ball.remove());
+    currentBalls = [];
+    
+    for (let i = 0; i < maxParticles; i++) {
+        const currentBall = document.createElement('div');
+        currentBall.classList.add('currentFlow');
+        document.body.appendChild(currentBall);
+        currentBalls.push(currentBall);
+
+        currentBall.style.position = 'absolute';
+        currentBall.style.top = `${rect.top + 170}px`; // Below the black line
+        currentBall.style.left = `${rect.left + 360}px`;
+
+        // Each current particle starts with a delay so they don't overlap
+        currentBall.animate([
+            { transform: `translate(0px, 0px)` },               // Start at cathode
+            { transform: `translate(0px, 120px)` },             // Move lower below the black line
+            { transform: `translate(-250px, 120px)` },          // Move left
+            { transform: `translate(-250px, 0px)` }             // Move up to anode
+        ], {
+            duration: 3000,
+            iterations: Infinity,
+            delay: i * 500 // Staggered start for each particle
+        });
+    }
 }
+
+function resetCanvas() {
+    const canvas = document.getElementById('galvanicCellCanvas');
+    const ctx = canvas.getContext('2d');
+    
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    document.getElementById('blastEffect').style.display = 'none';
+
+    // Clear electron and current particles when resetting the canvas
+    electronBalls.forEach(ball => ball.remove());
+    currentBalls.forEach(ball => ball.remove());
+    electronBalls = [];
+    currentBalls = [];
+}
+
+
+
 
 function updateFlowIndicators(anode, cathode) {
     const electronColor = "#FFA500"; 
